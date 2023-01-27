@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
 import { CarsService } from './cars.service';
+import { CreateCarDto } from './dto/create-car.dto';
 
 // los controladores  escuchan las peticiones del cliente (postman) y emite una respuesta.
 @Controller('cars') //el endpoint es cars que es la ruta para buscar en el postman.
@@ -15,14 +16,14 @@ export class CarsController {
     }
 
     @Get(':id')
-    getCarById( @Param('id', ParseIntPipe)  id: number ){ // con @param nest sabrá que se quiere es leer el id del decorador get, y con ParseIntPipe para vol-ver el string un número
+    getCarById( @Param('id', new ParseUUIDPipe({version: '4'}))  id: string){ // con @param nest sabrá que se quiere es leer el id del decorador get, y con ParseIntPipe para vol-ver el string un número
         console.log({id});
         return this.carsService.findOneById( id ); 
     }
 
     @Post()
-    createCar(@Body() body: any){
-        return body;
+    createCar(@Body() createCarDto: CreateCarDto){
+        return createCarDto;
     }
     @Patch(':id')
     updateCar(
