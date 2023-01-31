@@ -4,7 +4,7 @@ export class Brand {
     name: string ;
 
     createdAt: number;
-    updateAt?: number;
+    updatedAt?: number;
 
 
 }

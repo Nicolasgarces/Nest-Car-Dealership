@@ -7,21 +7,12 @@ import { CreateCarDto, UpdateCarDto } from './dto';
 export class CarsService {
 // cars (el array) es de tipo CAR (la interface)
     private cars: Car[] = [ // la interfase Car nos ayuda a que si no ponemos un propiedad del array nos pintara el error
-        {
-            id: uuid(),
-            brand: 'Toyota',
-            model: 'Corolla'
-        },
-        {
-            id: uuid(),
-            brand: 'Honda',
-            model: 'Civic'
-        },
-        {
-            id: uuid(),
-            brand: 'Jeep',
-            model: 'Cherokee'
-        },
+        // {
+        //     id: uuid(),
+        //     brand: 'Toyota',
+        //     model: 'Corolla'
+        // },
+       
     ];
 
         findAll(){
@@ -72,5 +63,10 @@ export class CarsService {
            const car = this.findOneById( id );
            this.cars = this.cars.filter(car => car.id !== id); // si el id que envian del front es igual al del array cars entonces eliminará el carro
         }
+
+        fillCarsWitchSeedData( cars: Car[]) {
+            this.cars = cars;
+        }
+
 }
 
